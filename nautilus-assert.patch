@@ -1,0 +1,11 @@
+--- nautilus-42.6/src/nautilus-file-operations.c.orig	2022-12-23 19:00:21.000000000 +0100
++++ nautilus-42.6/src/nautilus-file-operations.c	2023-05-19 22:38:06.068894888 +0200
+@@ -4388,7 +4388,7 @@ get_unique_target_file (GFile      *src,
+     if (dest == NULL)
+     {
+         basename = g_file_get_basename (src);
+-        g_assert (basename == NULL);
++        g_assert (basename != NULL);
+ 
+         if (g_utf8_validate (basename, -1, NULL))
+         {

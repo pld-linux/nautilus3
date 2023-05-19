@@ -14,12 +14,13 @@ Summary(pl.UTF-8):	Nautilus - powłoka GNOME i zarządca plików
 Summary(pt_BR.UTF-8):	Nautilus é um gerenciador de arquivos para o GNOME
 Name:		nautilus3
 Version:	42.6
-Release:	2
+Release:	3
 License:	GPL v3+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/nautilus/42/nautilus-%{version}.tar.xz
 # Source0-md5:	beaf60362666263abca992d00ab9df9b
 Patch0:		nautilus-gnome-desktop.patch
+Patch1:		nautilus-assert.patch
 URL:		https://wiki.gnome.org/Apps/Files
 BuildRequires:	docbook-dtd412-xml
 # -std=c11
@@ -149,6 +150,7 @@ Dokumentacja API Nautilusa 3.
 %prep
 %setup -q -n nautilus-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %meson build \
