@@ -14,7 +14,7 @@ Summary(pl.UTF-8):	Nautilus - powłoka GNOME i zarządca plików
 Summary(pt_BR.UTF-8):	Nautilus é um gerenciador de arquivos para o GNOME
 Name:		nautilus3
 Version:	42.6
-Release:	4
+Release:	5
 License:	GPL v3+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/nautilus/42/nautilus-%{version}.tar.xz
@@ -49,9 +49,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	tracker3-devel >= 3.0
-# for tests
-#BuildRequires:	tracker3-testutils >= 3.0
+BuildRequires:	tinysparql-devel >= 3.8
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
@@ -68,8 +66,8 @@ Requires:	hicolor-icon-theme
 Requires:	libhandy1 >= 1.5.0
 %{?with_libportal:Requires:	libportal >= 0.3}
 Requires:	libxml2 >= 1:2.7.8
-Requires:	tracker3 >= 3.0
-Requires:	tracker3-miners >= 3.0
+Requires:	localsearch >= 3.8
+Requires:	tinysparql >= 3.8
 Provides:	gnome-volume-manager
 Obsoletes:	eel < 2.21
 Obsoletes:	gnome-volume-manager < 2.23
@@ -171,6 +169,8 @@ rm -rf $RPM_BUILD_ROOT
 # not supported by glibc
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/io
 
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/{tracker3,localsearch3}
+
 %find_lang %{name} --with-gnome --all-name
 
 %clean
@@ -208,10 +208,8 @@ fi
 %{_datadir}/dbus-1/services/org.gnome.Nautilus.Tracker3.Miner.Files.service
 %{_datadir}/glib-2.0/schemas/org.gnome.nautilus.gschema.xml
 %{_datadir}/gnome-shell/search-providers/org.gnome.Nautilus.search-provider.ini
+%{_datadir}/localsearch3/domain-ontologies/org.gnome.Nautilus.domain.rule
 %{_datadir}/nautilus
-# XXX: tracker3 owns datadir/tracker3/ontologies, tracker3-miners own datadir/tracker3-miners/domain-ontologies - 3rd variant here?
-%dir %{_datadir}/tracker3/domain-ontologies
-%{_datadir}/tracker3/domain-ontologies/org.gnome.Nautilus.domain.rule
 %{_desktopdir}/nautilus-autorun-software.desktop
 %{_desktopdir}/org.gnome.Nautilus.desktop
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.Nautilus.svg
