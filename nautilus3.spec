@@ -149,8 +149,8 @@ Dokumentacja API Nautilusa 3.
 
 %prep
 %setup -q -n nautilus-%{version}
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %build
 %meson build \
