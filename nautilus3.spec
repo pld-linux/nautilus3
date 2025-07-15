@@ -151,19 +151,19 @@ Dokumentacja API Nautilusa 3.
 %patch -P1 -p1
 
 %build
-%meson build \
+%meson \
 	-Ddocs=%{__true_false apidocs} \
 	%{!?with_libportal:-Dlibportal=false} \
 	-Dpackagekit=true \
 	%{?with_selinux:-Dselinux=true} \
 	-Dtests=none
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{sr@ije,sr@ijekavian}
 # not supported by glibc
